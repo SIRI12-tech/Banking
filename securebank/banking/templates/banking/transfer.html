@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Make a Transfer{% endblock %}
+{% load static %}
+{% block content %}
+<div class="transaction-form-container">
+    <h2>Make a Transfer</h2>
+    <form method="post" class="transaction-form">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                    <small class="helptext">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <p class="errorlist">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit">Submit Transfer</button>
+    </form>
+</div>
+{% endblock %}

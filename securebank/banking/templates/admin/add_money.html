@@ -1,0 +1,16 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Add money to the following accounts:</p>
+    <ul>
+    {% for account in accounts %}
+        <li>{{ account.user.username }} ({{ account.account_number }})</li>
+    {% endfor %}
+    </ul>
+    <p>{{ form.amount.label_tag }} {{ form.amount }}</p>
+    <input type="hidden" name="action" value="add_money" />
+    <input type="submit" name="apply" value="Add Money" />
+</form>
+{% endblock %}

@@ -1,0 +1,312 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #d4001a;
+}
+
+.navbar-nav .nav-link {
+    color: #333;
+    font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #d4001a;
+}
+
+/* Main Content Styles */
+main {
+    padding: 40px 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Card Styles */
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,.1);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    font-weight: bold;
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: #d4001a;
+    border-color: #d4001a;
+}
+
+.btn-primary:hover {
+    background-color: #aa0014;
+    border-color: #aa0014;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* Form Styles */
+.form-control {
+    border-radius: 4px;
+}
+
+.form-control:focus {
+    border-color: #d4001a;
+    box-shadow: 0 0 0 0.2rem rgba(212, 0, 26, 0.25);
+}
+
+/* Table Styles */
+.table {
+    background-color: #fff;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: bold;
+}
+
+/* Alert Styles */
+.alert {
+    border-radius: 4px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+footer a {
+    color: #fff;
+}
+
+footer a:hover {
+    color: #d4001a;
+}
+
+/* Dashboard Specific Styles */
+.account-summary {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,.1);
+}
+
+.account-balance {
+    font-size: 24px;
+    font-weight: bold;
+    color: #d4001a;
+}
+
+/* Transaction History Styles */
+.transaction-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar-nav {
+        flex-direction: column;
+    }
+    
+    .account-summary {
+        margin-bottom: 20px;
+    }
+}
+
+.hero {
+    background-image: url('../images/hero-background.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.btn-primary {
+    background-color: #d4001a;
+    border-color: #d4001a;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+}
+
+.btn-primary:hover {
+    background-color: #aa0014;
+    border-color: #aa0014;
+}
+
+.btn-outline-light:hover {
+    color: #d4001a;
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #d4001a;
+}
+
+.cta-section {
+    background-color: #f8f9fa;
+    padding: 50px 0;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .btn-lg {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+}
+
+/* Styles for deposit, transfer, and withdrawal pages */
+.transaction-form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-form-container h2 {
+    color: #d4001a;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.transaction-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.transaction-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.transaction-form label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.transaction-form input[type="text"],
+.transaction-form input[type="number"],
+.transaction-form select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.transaction-form input[type="text"]:focus,
+.transaction-form input[type="number"]:focus,
+.transaction-form select:focus {
+    border-color: #d4001a;
+    box-shadow: 0 0 0 0.2rem rgba(212, 0, 26, 0.25);
+    outline: none;
+}
+
+.transaction-form button[type="submit"] {
+    background-color: #d4001a;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.transaction-form button[type="submit"]:hover {
+    background-color: #aa0014;
+}
+
+.transaction-form .helptext {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+}
+
+.transaction-form .errorlist {
+    color: #d4001a;
+    list-style-type: none;
+    padding: 0;
+    margin: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+    .transaction-form-container {
+        padding: 1.5rem;
+    }
+}

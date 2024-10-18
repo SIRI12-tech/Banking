@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us{% endblock %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Contact Us</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Get in Touch</h2>
+            <p>We're here to help and answer any question you might have. We look forward to hearing from you.</p>
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h2>Contact Information</h2>
+            <ul class="list-unstyled">
+                <li><strong>Address:</strong> Blackwell Dr
+                    Piqua, OH 45356</li>
+                <li><strong>Phone:</strong> +1 (614) 708-6695</li>
+                <li><strong>Email:</strong> securebankon@gmail.com</li>
+            </ul>
+            <h3 class="mt-4">Business Hours</h3>
+            <ul class="list-unstyled">
+                <li><strong>Monday-Friday:</strong> 9:00 AM - 5:00 PM</li>
+                <li><strong>Saturday:</strong> 10:00 AM - 2:00 PM</li>
+                <li><strong>Sunday:</strong> Closed</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

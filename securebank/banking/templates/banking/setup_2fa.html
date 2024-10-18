@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}Setup Two-Factor Authentication{% endblock %}
+{% load static %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card fade-in">
+            <div class="card-header">
+                <h2 class="text-center mb-0">Setup Two-Factor Authentication</h2>
+            </div>
+            <div class="card-body">
+                {% if device %}
+                <p class="mb-3">Scan this QR code with your authenticator app:</p>
+                <div class="text-center mb-3">
+                    <img src="{{ device.config_url }}" alt="QR Code" class="img-fluid">
+                </div>
+                <p class="mb-3">Or enter this key manually: <strong>{{ device.key }}</strong></p>
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_otp" class="form-label">Enter the 6-digit code from your app</label>
+                        <input type="text" name="otp" id="id_otp" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Please enter the 6-digit code.
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Verify and Enable 2FA</button>
+                    </div>
+                </form>
+                {% else %}
+                <p class="mb-3">Two-Factor Authentication adds an extra layer of security to your account.</p>
+                <div class="d-grid gap-2">
+                    <button id="setup-totp-btn" class="btn btn-primary">Setup Two-Factor Authentication</button>
+                </div>
+                <div id="totp-qr-code" class="d-none mt-3">
+                    <p>Loading QR code...</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const setupTOTPBtn = document.getElementById('setup-totp-btn');
+        const totpQRCode = document.getElementById('totp-qr-code');
+        
+        if (setupTOTPBtn && totpQRCode) {
+            setupTOTPBtn.addEventListener('click', function() {
+                setupTOTPBtn.disabled = true;
+                setupTOTPBtn.textContent = 'Loading...';
+                
+                fetch('{% url "setup_2fa" %}', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({}),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.qr_code) {
+                        totpQRCode.innerHTML = `
+                            <p class="mb-3">Scan this QR code with your authenticator app:</p>
+                            <div class="text-center mb-3">
+                                <img src="${data.qr_code}" alt="QR Code" class="img-fluid">
+                            </div>
+                            <p class="mb-3">Or enter this key manually: <strong>${data.secret_key}</strong></p>
+                            <form method="post" class="needs-validation" novalidate>
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="id_otp" class="form-label">Enter the 6-digit code from your app</label>
+                                    <input type="text" name="otp" id="id_otp" class="form-control" required>
+                                    <div class="invalid-feedback">
+                                        Please enter the 6-digit code.
+                                    </div>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary">Verify and Enable 2FA</button>
+                                </div>
+                            </form>
+                        `;
+                        totpQRCode.classList.remove('d-none');
+                        setupTOTPBtn.classList.add('d-none');
+                    } else {
+                        totpQRCode.innerHTML = '<p class="text-danger">Error generating QR code. Please try again.</p>';
+                        totpQRCode.classList.remove('d-none');
+                        setupTOTPBtn.disabled = false;
+                        setupTOTPBtn.textContent = 'Setup Two-Factor Authentication';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    totpQRCode.innerHTML = '<p class="text-danger">An error occurred. Please try again.</p>';
+                    totpQRCode.classList.remove('d-none');
+                    setupTOTPBtn.disabled = false;
+                    setupTOTPBtn.textContent = 'Setup Two-Factor Authentication';
+                });
+            });
+        }
+    });
+</script>
+{% endblock %}
